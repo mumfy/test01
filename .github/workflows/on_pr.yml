@@ -22,6 +22,11 @@ jobs:
       run: git status
 
 
+    - name: Print PR Branch name extracted from GitHub context
+      env:
+        BRNAME: ${{ github.head_ref }}
+      run: echo "Branch name = $BRNAME"
+
     - name: Dump Action GitHub context
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
