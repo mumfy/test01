@@ -18,10 +18,13 @@ jobs:
     - name: show git status
       run: git status
 
+    - name: show git reflogs
+      run: git reflog --all 
+
     - name: show git log
       run: git log --oneline
 
-    - name: show git branch cotaining head
+    - name: show git branch containing head
       run: git branch --contains HEAD
 
     - name: show git log something something head
