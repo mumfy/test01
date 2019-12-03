@@ -1,4 +1,4 @@
-name: push_showinfo
+name: push-or-PR_showinfo
 
 on: [push,pull_request]
 
