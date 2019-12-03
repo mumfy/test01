@@ -14,6 +14,9 @@ jobs:
     - name: Print Welcome to Push OR PR
       run: echo "This is the push_or_pr_showinfo script"
 
+    - name: Print date
+      run: date
+
 
     - name: show git status
       run: git status
