@@ -9,12 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      
+
     - name: show git status
       run: git status
     - name: show git branches
@@ -25,13 +21,28 @@ jobs:
       run: git branch | grep '\*' | awk '$1 == "*" { print $2 } '
     - name: show environment
       run: env
+      env:
+        GH: ${{ toJson(github) }}
+        GH_ref: ${{ github.ref }}
+        GH_headref: ${{ github.head_ref }}
+        GH_baseref: ${{ github.base_ref }}
     - name: show vars
       run: set
+
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
 
     - name: run ls
       run: |
         pwd
-        ls -l
+        ls -la
+
 
     - name: sleep
       run: sleep 1
