@@ -1,0 +1,41 @@
+name: push-or-PR_showinfo
+
+on: [push,pull_request]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Print Welcome to Push OR PR
+      run: echo "This is the push_or_pr_showinfo script"
+
+
+    - name: show git status
+      run: git status
+
+
+    - name: Dump Action GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: Dump Action job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+
+    - name: Dump Action steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+
+
+    - name: show environment
+      run: env | sort
+
+
