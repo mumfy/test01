@@ -1,6 +1,6 @@
-name: test
+name: showinfo
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -9,30 +9,36 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      
+
 
     - name: show git status
       run: git status
     - name: show git branches
       run: git branch
-    - name: get current git branch using grep and cut
-      run: git branch | grep '\*' | cut -d" " -f2
-    - name: get current git branch using awk
-      run: git branch | grep '\*' | awk '$1 == "*" { print $2 } '
+
     - name: show environment
       run: env
+
+    - name: show vars
+      run: set
+
+    - name: show GH branch and PR branch vars
+      run: echo "github.ref = $GH_ref    github.head_ref = $GH_headref    github.base_ref = $GH_baseref"
       env:
-        GH: ${{ toJson(github) }}
         GH_ref: ${{ github.ref }}
         GH_headref: ${{ github.head_ref }}
         GH_baseref: ${{ github.base_ref }}
-    - name: show vars
-      run: set
+
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
 
     - name: Dump job context
       env:
         JOB_CONTEXT: ${{ toJson(job) }}
       run: echo "$JOB_CONTEXT"
+
     - name: Dump steps context
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
@@ -42,7 +48,3 @@ jobs:
       run: |
         pwd
         ls -la
-
-
-    - name: sleep
-      run: sleep 1
