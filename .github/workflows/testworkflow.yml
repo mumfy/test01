@@ -15,14 +15,23 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+    - name: show git status
+      run: git status
     - name: show git branches
       run: git branch
     - name: get current git branch using grep and cut
       run: git branch | grep '\*' | cut -d" " -f2
     - name: get current git branch using awk
       run: git branch | grep '\*' | awk '$1 == "*" { print $2 } '
-    - name: show git status
-      run: git status
+    - name: show environment
+      run: env
+    - name: show vars
+      run: set
+
+    - name: run ls
+      run: |
+        pwd
+        ls -l
 
     - name: sleep
       run: sleep 1
