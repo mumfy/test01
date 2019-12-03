@@ -18,6 +18,15 @@ jobs:
     - name: show git status
       run: git status
 
+    - name: show git log
+      run: git log --oneline
+
+    - name: show git branch cotaining head
+      run: git branch --contains HEAD
+
+    - name: show git log something something head
+      run: git log -n 1 --pretty=%d HEAD
+
 
     - name: Dump Action GitHub context
       env:
