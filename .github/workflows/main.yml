@@ -1,6 +1,10 @@
 name: defaultCIworkflow
 
-on: [push]
+on:
+  push:
+    branches: 
+      - master
+      - 'feature/*'
 
 jobs:
   build:
