@@ -18,14 +18,21 @@ jobs:
 
     - name: show environment
       run: env
-      env:
-        GH_ACTION: ${{ toJson(github) }}
-        GH_ACTION_ref: ${{ github.ref }}
-        GH_ACTION_headref: ${{ github.head_ref }}
-        GH_ACTION_baseref: ${{ github.base_ref }}
 
     - name: show vars
       run: set
+
+    - name: show GH branch and PR branch vars
+      run: echo "github.ref = $GH_ref    github.head_ref = $GH_headref    github.base_ref = $GH_baseref"
+      env:
+        GH_ref: ${{ github.ref }}
+        GH_headref: ${{ github.head_ref }}
+        GH_baseref: ${{ github.base_ref }}
+
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
 
     - name: Dump job context
       env:
