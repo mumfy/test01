@@ -35,3 +35,7 @@ jobs:
       run: echo "$STEPS_CONTEXT"
 
 
+    - name: show environment
+      run: env | sort
+
+
